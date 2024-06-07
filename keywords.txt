@@ -1,0 +1,23 @@
+# Class definitions
+GUIMaker   KEYWORD1
+
+# Functions
+begin          KEYWORD2
+update         KEYWORD2
+clear          KEYWORD2
+createScreen   KEYWORD2
+createButton   KEYWORD2
+createLabel    KEYWORD2
+createBar      KEYWORD2
+createSlider   KEYWORD2
+createChart    KEYWORD2
+createTable    KEYWORD2
+createCheckbox KEYWORD2
+createDropdown KEYWORD2
+createSwitch   KEYWORD2
+createTextarea KEYWORD2
+createKeyboard KEYWORD2
+createMessagebox KEYWORD2
+createArc      KEYWORD2
+createSpinner  KEYWORD2
+createLed      KEYWORD2
