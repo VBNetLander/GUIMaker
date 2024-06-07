@@ -110,3 +110,53 @@ lv_obj_t* GUIMaker::createCheckbox(lv_obj_t* parent, const char* label, uint16_t
 
 lv_obj_t* GUIMaker::createDropdown(lv_obj_t* parent, const char* options, uint16_t width, uint16_t height, uint16_t x, uint16_t y) {
     lv_obj_t* dropdown = lv_dropdown_create(parent, NULL);
+    lv_dropdown_set_options(dropdown, options);
+    lv_obj_set_size(dropdown, width, height);
+    lv_obj_set_pos(dropdown, x, y);
+    return dropdown;
+}
+
+lv_obj_t* GUIMaker::createSwitch(lv_obj_t* parent, uint16_t x, uint16_t y) {
+    lv_obj_t* sw = lv_switch_create(parent, NULL);
+    lv_obj_set_pos(sw, x, y);
+    return sw;
+}
+
+lv_obj_t* GUIMaker::createTextarea(lv_obj_t* parent, const char* placeholder, uint16_t width, uint16_t height, uint16_t x, uint16_t y) {
+    lv_obj_t* textarea = lv_textarea_create(parent, NULL);
+    lv_textarea_set_placeholder_text(textarea, placeholder);
+    lv_obj_set_size(textarea, width, height);
+    lv_obj_set_pos(textarea, x, y);
+    return textarea;
+}
+
+lv_obj_t* GUIMaker::createKeyboard(lv_obj_t* parent) {
+    lv_obj_t* keyboard = lv_keyboard_create(parent, NULL);
+    return keyboard;
+}
+
+lv_obj_t* GUIMaker::createMessagebox(const char* title, const char* text, const char* buttons[], bool add_close_button) {
+    lv_obj_t* msgbox = lv_msgbox_create(NULL, title, text, buttons, add_close_button);
+    lv_obj_center(msgbox);
+    return msgbox;
+}
+
+lv_obj_t* GUIMaker::createArc(lv_obj_t* parent, uint16_t width, uint16_t height, uint16_t x, uint16_t y) {
+    lv_obj_t* arc = lv_arc_create(parent, NULL);
+    lv_obj_set_size(arc, width, height);
+    lv_obj_set_pos(arc, x, y);
+    return arc;
+}
+
+lv_obj_t* GUIMaker::createSpinner(lv_obj_t* parent, uint16_t width, uint16_t height, uint32_t time, uint16_t x, uint16_t y) {
+    lv_obj_t* spinner = lv_spinner_create(parent, time, 100);
+    lv_obj_set_size(spinner, width, height);
+    lv_obj_set_pos(spinner, x, y);
+    return spinner;
+}
+
+lv_obj_t* GUIMaker::createLed(lv_obj_t* parent, uint16_t x, uint16_t y) {
+    lv_obj_t* led = lv_led_create(parent, NULL);
+    lv_obj_set_pos(led, x, y);
+    return led;
+}

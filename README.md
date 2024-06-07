@@ -1,43 +1,48 @@
 # GUIMaker
 
-GUIMaker is a library designed to simplify the creation of graphical user interfaces (GUIs) for Arduino Giga Display Shield using the popular LVGL library.
+GUIMaker è una libreria che semplifica la creazione di GUI per Arduino Giga Display Shield ed altri display con supporto al touch screen. La libreria sfrutta tutte le caratteristiche della popolare LVGL (Light and Versatile Graphics Library).
 
-## Installation
+## Installazione
 
-To use GUIMaker in your Arduino project, follow these steps:
+Per utilizzare GUIMaker nel tuo progetto, segui i seguenti passaggi:
 
-1. Download the latest release of the GUIMaker library from the [GitHub repository](https://github.com/your-username/GUIMaker).
-2. Extract the downloaded ZIP file.
-3. Copy the extracted folder to the Arduino libraries directory.
-4. Restart the Arduino IDE.
+1. Scarica il file ZIP della libreria dal repository GitHub.
+2. Apri l'IDE di Arduino.
+3. Vai su "Sketch" > "Includi Libreria" > "Aggiungi Libreria .ZIP".
+4. Seleziona il file ZIP scaricato e clicca su "Apri".
+5. L'IDE di Arduino installerà automaticamente la libreria GUIMaker.
 
-## Usage
+## Utilizzo
 
-To get started with GUIMaker, include the library in your Arduino sketch:
+Ecco un esempio di come utilizzare GUIMaker per creare una semplice interfaccia utente:
 
 ```cpp
 #include <GUIMaker.h>
+
+GUIMaker gui;
+
+void setup() {
+    // Inizializza il display
+    gui.init();
+    
+    // Crea un pulsante
+    gui.createButton(50, 50, 100, 50, "Clicca");
+}
+
+void loop() {
+    // Aggiorna la GUI
+    gui.update();
+}
 ```
 
-Next, initialize the Giga Display Shield and create a GUI object:
+## Documentazione
 
-```cpp
-GigaDisplayShield display;
-GUIMaker gui(display);
-```
+La documentazione completa di GUIMaker è disponibile nel file [DOCUMENTAZIONE.md](DOCUMENTAZIONE.md).
 
-You can now start creating your GUI elements using the provided functions and methods. For example, to create a button:
+## Contributi
 
-```cpp
-gui.createButton(10, 10, 100, 50, "Click Me");
-```
+Se desideri contribuire allo sviluppo di GUIMaker, puoi aprire una pull request nel repository GitHub.
 
-For more detailed documentation and examples, please refer to the [GUIMaker GitHub repository](https://github.com/VBNetLander/GUIMaker).
+## Licenza
 
-## Contributing
-
-Contributions to GUIMaker are welcome! If you find any bugs or have suggestions for improvements, please open an issue on the [GitHub repository](https://github.com/VBNetLander/GUIMaker).
-
-## License
-
-GUIMaker is released under the [MIT License](https://opensource.org/licenses/MIT).
+GUIMaker è distribuito con licenza MIT. Per ulteriori informazioni, consulta il file [LICENSE.md](LICENSE.md).
