@@ -1,4 +1,4 @@
-#include "GUIMaker.h"
+#include <GUIMaker.h>
 
 GUIMaker gui;
 
@@ -16,9 +16,4 @@ void setup() {
     gui.createBar(screen, 200, 20, 70, 300, 200);
     gui.createLabel(screen, "Hello World", 350, 250);
 
-    gui.createButton(screen, "Press Me", 100, 50, onButtonClick);
-}
-
-void loop() {
-    gui.update();
-}
+    gui.createButton(screen, "Press Me
