@@ -1,4 +1,7 @@
 {
     "configuration": "target_core=cm7,split=100_0",
-    "board": "arduino:mbed_giga:giga"
+    "board": "arduino:mbed_giga:giga",
+    "programmer": "cmsis-dap",
+    "port": "/dev/tty.usbmodem141201",
+    "sketch": "examples/TextInputExample/TextInputExample.ino"
 }
