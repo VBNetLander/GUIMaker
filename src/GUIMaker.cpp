@@ -10,7 +10,7 @@ void GUIMaker::begin() {
 
     static lv_disp_draw_buf_t draw_buf;
     static lv_color_t buf[LV_HOR_RES_MAX * 10];
-    lv_disp_draw_buf_init(&draw_buf, buf, NULL, LV_HOR_RES_MAX * 10);
+    lv_disp_draw_buf_init(& draw_buf, buf, NULL, LV_HOR_RES_MAX * 10);
 
     static lv_disp_drv_t disp_drv;
     lv_disp_drv_init(&disp_drv);
@@ -116,15 +116,11 @@ lv_obj_t* GUIMaker::CreateLED(lv_obj_t* parent, uint16_t x, uint16_t y) {
     return led;
 }
 
-lv_obj_t* GUIMaker::CreateCheckbox(lv_obj_t* parent, const char* label, bool checked, lv_style_t* style, lv_style_t* style_chk) {
+lv_obj_t* GUIMaker::CreateCheckbox(lv_obj_t* parent, const char* label, bool checked) {
     lv_obj_t* cb = lv_checkbox_create(parent, NULL);
     lv_checkbox_set_text(cb, label);
     if (checked) {
         lv_obj_add_state(cb, LV_STATE_CHECKED);
-    }
-    if (style != nullptr && style_chk != nullptr) {
-        lv_obj_add_style(cb, style, LV_PART_INDICATOR);
-        lv_obj_add_style(cb, style_chk, LV_PART_INDICATOR | LV_STATE_CHECKED);
     }
     return cb;
 }
@@ -137,7 +133,7 @@ lv_obj_t* GUIMaker::CreateDropdown(lv_obj_t* parent, const char* options, uint16
     return dd;
 }
 
-lv_obj_t* GUIMaker::CreateRoller(lv_obj_t* parent, const char* options, uint16_t width, uint16_t height, uint16_t x, uint16_t y) {
+lv_obj_t* GUIMaker::CreateRoller(lv_obj_t* parent, const char* options, uint16_t width, uint16_t height, uint16_t x, uintuint16_ty) {
     lv_obj_t* roller = lv_roller_create(parent, NULL);
     lv_roller_set_options(roller, options, LV_ROLLER_MODE_NORMAL);
     lv_obj_set_size(roller, width, height);
@@ -246,20 +242,47 @@ lv_obj_t* GUIMaker::CreateGauge(lv_obj_t* parent, uint16_t x, uint16_t y) {
     return gauge;
 }
 
-lv_obj_t* GUIMaker::CreateContainer(lv_obj_t* parent, lv_coord_t* col_dsc, lv_coord_t* row_dsc, uint16_t width, uint16_t height, lv_color_t bg_color) {
+lv_obj_t* GUIMaker::CreateContainer(lv_obj_t* parent, const uint16_t* col_dsc, size_t col_cnt, const uint16_t* row_dsc, size_t row_cnt, uint16_t width, uint16_t height, uint32_t bg_color) {
     lv_obj_t* cont = lv_obj_create(parent, NULL);
-    lv_obj_set_grid_dsc_array(cont, col_dsc, row_dsc);
+
+    lv_coord_t col_dsc_lvgl[col_cnt + 1];
+    lv_coord_t row_dsc_lvgl[row_cnt + 1];
+    for(size_t i = 0; i < col_cnt; ++i) {
+        col_dsc_lvgl[i] = col_dsc[i];
+    }
+    col_dsc_lvgl[col_cnt] = LV_GRID_TEMPLATE_LAST;
+
+    for(size_t i = 0; i < row_cnt; ++i) {
+        row_dsc_lvgl[i] = row_dsc[i];
+    }
+    row_dsc_lvgl[row_cnt] = LV_GRID_TEMPLATE_LAST;
+
+    lv_obj_set_grid_dsc_array(cont, col_dsc_lvgl, row_dsc_lvgl);
     lv_obj_set_size(cont, width, height);
-    lv_obj_set_style_bg_color(cont, bg_color, LV_PART_MAIN);
+    lv_obj_set_style_bg_color(cont, lv_color_hex(bg_color), LV_PART_MAIN);
     lv_obj_center(cont);
     return cont;
 }
 
-lv_obj_t* GUIMaker::CreateObject(lv_obj_t* parent, uint16_t col, uint16_t col_span, uint16_t row, uint16_t row_span) {
-    lv_obj_t* obj = lv_obj_create(parent, NULL);
-    lv_obj_set_grid_cell(obj, LV_GRID_ALIGN_STRETCH, col, col_span,
-                         LV_GRID_ALIGN_STRETCH, row, row_span);
-    return obj;
+lv_obj_t* GUIMaker::CreateGrid(lv_obj_t* parent, const uint16_t* col_dsc, size_t col_cnt, const uint16_t* row_dsc, size_t row_cnt, uint16_t width, uint16_t height) {
+    lv_obj_t* grid = lv_obj_create(parent, NULL);
+
+    lv_coord_t col_dsc_lvgl[col_cnt + 1];
+    lv_coord_t row_dsc_lvgl[row_cnt + 1];
+    for(size_t i = 0; i < col_cnt; ++i) {
+        col_dsc_lvgl[i] = col_dsc[i];
+    }
+    col_dsc_lvgl[col_cnt] = LV_GRID_TEMPLATE_LAST;
+
+    for(size_t i = 0; i < row_cnt; ++i) {
+        row_dsc_lvgl[i] = row_dsc[i];
+    }
+    row_dsc_lvgl[row_cnt] = LV_GRID_TEMPLATE_LAST;
+
+    lv_obj_set_grid_dsc_array(grid, col_dsc_lvgl, row_dsc_lvgl);
+    lv_obj_set_size(grid, width, height);
+    lv_obj_center(grid);
+    return grid;
 }
 
 void GUIMaker::SetFlexFlow(lv_obj_t* obj, lv_flex_flow_t flow) {

@@ -1,10 +1,11 @@
 #ifndef GUIMAKER_H
 #define GUIMAKER_H
 
-#include "lvgl.h"
+#include <lvgl.h>
 #include "Arduino_H7_Video.h"
 #include "Arduino_GigaDisplayTouch.h"
 
+// Classe principale per la gestione della GUI
 class GUIMaker {
 public:
     GUIMaker();
@@ -23,7 +24,7 @@ public:
     lv_obj_t* CreateSlider(lv_obj_t* parent, uint16_t width, uint16_t height, int32_t initial_value);
     lv_obj_t* CreateSwitch(lv_obj_t* parent, uint16_t x, uint16_t y);
     lv_obj_t* CreateLED(lv_obj_t* parent, uint16_t x, uint16_t y);
-    lv_obj_t* CreateCheckbox(lv_obj_t* parent, const char* label, bool checked, lv_style_t* style = nullptr, lv_style_t* style_chk = nullptr);
+    lv_obj_t* CreateCheckbox(lv_obj_t* parent, const char* label, bool checked);
     lv_obj_t* CreateDropdown(lv_obj_t* parent, const char* options, uint16_t width, uint16_t height, uint16_t x, uint16_t y);
     lv_obj_t* CreateRoller(lv_obj_t* parent, const char* options, uint16_t width, uint16_t height, uint16_t x, uint16_t y);
     lv_obj_t* CreateTextarea(lv_obj_t* parent, const char* placeholder, uint16_t width, uint16_t height, uint16_t x, uint16_t y);
@@ -40,8 +41,8 @@ public:
     lv_obj_t* CreatePreloader(lv_obj_t* parent, uint16_t width, uint16_t height, uint32_t time, uint16_t x, uint16_t y);
     lv_obj_t* CreateMeter(lv_obj_t* parent, uint16_t x, uint16_t y);
     lv_obj_t* CreateGauge(lv_obj_t* parent, uint16_t x, uint16_t y);
-    lv_obj_t* CreateContainer(lv_obj_t* parent, lv_coord_t* col_dsc, lv_coord_t* row_dsc, uint16_t width, uint16_t height, lv_color_t bg_color);
-    lv_obj_t* CreateObject(lv_obj_t* parent, uint16_t col, uint16_t col_span, uint16_t row, uint16_t row_span);
+    lv_obj_t* CreateContainer(lv_obj_t* parent, const uint16_t* col_dsc, size_t col_cnt, const uint16_t* row_dsc, size_t row_cnt, uint16_t width, uint16_t height, uint32_t bg_color);
+    lv_obj_t* CreateGrid(lv_obj_t* parent, const uint16_t* col_dsc, size_t col_cnt, const uint16_t* row_dsc, size_t row_cnt, uint16_t width, uint16_t height);
 
     void SetFlexFlow(lv_obj_t* obj, lv_flex_flow_t flow);
 
