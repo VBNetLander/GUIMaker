@@ -52,6 +52,8 @@ private:
     Arduino_H7_Video Display;
     Arduino_GigaDisplayTouch Touch;
 
+    void setupDisplay();
+
     static void textarea_event_cb(lv_event_t * e);
 };
 

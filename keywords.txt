@@ -1,3 +1,4 @@
+begin	KEYWORD2
 CreateScreen	KEYWORD2
 CreateButton	KEYWORD2
 CreateLabel	KEYWORD2
@@ -26,4 +27,5 @@ CreatePreloader	KEYWORD2
 CreateMeter	KEYWORD2
 CreateGauge	KEYWORD2
 CreateContainer	KEYWORD2
+CreateGrid	KEYWORD2
 SetFlexFlow	KEYWORD2

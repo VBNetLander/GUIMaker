@@ -4,7 +4,10 @@ GUIMaker::GUIMaker() : Display(800, 480, GigaDisplayShield), Touch(), keyboard(N
 
 void GUIMaker::begin() {
     lv_init();
+    setupDisplay();
+}
 
+void GUIMaker::setupDisplay() {
     Display.begin();
     Touch.begin();
 
@@ -13,22 +16,22 @@ void GUIMaker::begin() {
     lv_disp_draw_buf_init(& draw_buf, buf, NULL, LV_HOR_RES_MAX * 10);
 
     static lv_disp_drv_t disp_drv;
-    lv_disp_drv_init(&disp_drv);
+    lv_disp_drv_init(& disp_drv);
     disp_drv.flush_cb = [](lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p) {
         Display.flush(disp_drv, area, color_p);
     };
-    disp_drv.draw_buf = &draw_buf;
+    disp_drv.draw_buf = & draw_buf;
     disp_drv.hor_res = 800;
     disp_drv.ver_res = 480;
-    lv_disp_drv_register(&disp_drv);
+    lv_disp_drv_register(& disp_drv);
 
     static lv_indev_drv_t indev_drv;
-    lv_indev_drv_init(&indev_drv);
+    lv_indev_drv_init(& indev_drv);
     indev_drv.type = LV_INDEV_TYPE_POINTER;
     indev_drv.read_cb = [](lv_indev_drv_t * indev_drv, lv_indev_data_t * data) {
         Touch.read(indev_drv, data);
     };
-    lv_indev_drv_register(&indev_drv);
+    lv_indev_drv_register(& indev_drv);
 }
 
 void GUIMaker::update() {
@@ -133,7 +136,7 @@ lv_obj_t* GUIMaker::CreateDropdown(lv_obj_t* parent, const char* options, uint16
     return dd;
 }
 
-lv_obj_t* GUIMaker::CreateRoller(lv_obj_t* parent, const char* options, uint16_t width, uint16_t height, uint16_t x, uintuint16_ty) {
+lv_obj_t* GUIMaker::CreateRoller(lv_obj_t* parent, const char* options, uint16_t width, uint16_t height, uint16_t x, uint16_t y) {
     lv_obj_t* roller = lv_roller_create(parent, NULL);
     lv_roller_set_options(roller, options, LV_ROLLER_MODE_NORMAL);
     lv_obj_set_size(roller, width, height);
